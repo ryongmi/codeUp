@@ -20,7 +20,10 @@ int main() {
     for(int i=0; i<n-1; i++){
         size_t k;
         cin>>k;
-        card.push_back(k);
+        card.emplace_back(k);
+        // emplace_back : push_back과 똑같은 연산을 하지만, push_back은 일반생성자, 복사생성자(이동생성자)를 호출하여 임시 객체를 만들어 복사를 하는데 오버헤드가 커지게 됨.
+        // 하지만 emplace_back은 일반 생성자만 호출을하여 복사를 하여 성능이 더 좋음.
+        // 아직 이 두가지의 차이를 완전히 알지를 못해 더 공부해야 할것 같음.
     }
 
     bool check{true};
