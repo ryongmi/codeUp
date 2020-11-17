@@ -10,47 +10,47 @@
 
 */
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 int grid[7][7];
 
-int check_map(int i, int j, int number) {
-    int check{0};
+int check_map(int i, int j, int number)
+{
 
-    if((0<=i<=7) && (0<=j<=7)) {
-        if(grid[i][j] == number){
-            check++;
-            check = check + check_map((i-1), j, number) + check_map((i+1), j, number) + check_map(i, (j-1), number) + check_map(i, (j+1), number);
+    if ((0 <= i <= 7) && (0 <= j <= 7))
+    {
+        if (grid[i][j] == number)
+        {
+            grid[i][j] = 0;
+            return 1 + check_map((i - 1), j, number) + check_map((i + 1), j, number) + check_map(i, (j - 1), number) + check_map(i, (j + 1), number);
         }
+        else
+            return 0;
     }
-
-    return check;
+    else
+        return 0;
 }
 
+int main()
+{
+    int check_block{0};
 
-int main() {
-    int check_block{1};
-    
-    for(int i=0; i<7; i++)
-        for(int j=0; j<7; j++)
-            cin>>grid[i][j];
+    for (int i = 0; i < 7; i++)
+        for (int j = 0; j < 7; j++)
+            cin >> grid[i][j];
 
-    // for(int i=0; i<7; i++)
-    //     for(int j=0; j<7; j++) {
-    //         if(check_map(i, j, grid[i][j]) >= 3)
-    //             check_block++;
-    //     }
-    cout<<endl;
-    cout<<check_block<<endl;
-
-    for(int i=0; i<7; i++){
-        for(int j=0; j<7; j++) {
-            cout<<check_map(i, j, grid[i][j])<<" ";
+    for (int i = 0; i < 7; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (grid[i][j] != 0)
+                if (check_map(i, j, grid[i][j]) >= 3)
+                    check_block++;
         }
-        cout<<endl;
     }
-    cout<<check_block;
+
+    cout << check_block;
 
     return 0;
 }
