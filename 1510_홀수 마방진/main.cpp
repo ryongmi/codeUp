@@ -21,21 +21,44 @@
 */
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int main()
-{
+int main() {
 
     int n;
     cin >> n;
 
-    int Mabangjin[][] = {0};
-    int count{};
+    vector <vector<int>> Mabangjin(n, vector <int>(n,0));
+    // n*n 이중 벡터 0으로 초기화
 
-    do
-    {
+    int row=0, col=n/2, Number=0;
 
-    } while (count == n * n);
+    while (Number < n*n) {
+        Number++;
+
+        if(row<0)
+            row=n-1;
+
+        if(col>=n)
+            col=0;
+
+        Mabangjin[row][col] = Number;
+
+        if((Number%n==0)){
+            row++;
+            continue;
+        }
+        
+        row--;
+        col++;
+    } 
+
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n; j++)
+            cout<<Mabangjin[i][j]<<" ";
+        cout<<endl;
+    }
 
     return 0;
 }
